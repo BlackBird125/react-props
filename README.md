@@ -1,46 +1,153 @@
-# Getting Started with Create React App
+# Todo リストアプリケーション
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+このプロジェクトは、React + TypeScript を使用して作成された、シンプルな Todo リストアプリケーションです。
+コンポーネントの分割と Props の使用方法を学ぶための教育用サンプルとして設計されています。
 
-## Available Scripts
+## 機能
 
-In the project directory, you can run:
+- Todo タスクの追加
+- Todo タスクの削除
+- シンプルで使いやすい UI
+- 完全な TypeScript 対応
 
-### `npm start`
+## プロジェクト構成
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+プロジェクトは以下の 3 つの主要コンポーネントで構成されています：
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1. TodoItem.tsx
 
-### `npm test`
+個々の Todo アイテムを表示するコンポーネント
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```typescript
+interface TodoItemProps {
+  title: string;
+  onDelete: () => void;
+}
+```
 
-### `npm run build`
+- **役割**:
+  - 個々の Todo アイテムの表示
+  - 削除ボタンの提供
+  - タスクタイトルの表示
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. TodoList.tsx
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Todo アイテムのリストを管理するコンポーネント
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```typescript
+interface TodoListProps {
+  todos: string[];
+  onDelete: (index: number) => void;
+}
+```
 
-### `npm run eject`
+- **役割**:
+  - Todo アイテムのリスト表示
+  - TodoItem コンポーネントの生成と管理
+  - 削除機能の個々の TodoItem への受け渡し
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 3. App.tsx
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+アプリケーションのメインコンポーネント
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- **役割**:
+  - アプリケーションの状態管理
+  - 新規 Todo 追加の UI 提供
+  - TodoList コンポーネントへのデータ受け渡し
+  - 削除機能の実装
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## 技術スタック
 
-## Learn More
+- React 18
+- TypeScript
+- Create React App
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## インストールと実行方法
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. プロジェクトのクローン:
+
+```bash
+git clone [リポジトリURL]
+cd todo-app
+```
+
+2. 依存関係のインストール:
+
+```bash
+npm install
+```
+
+3. 開発サーバーの起動:
+
+```bash
+npm start
+```
+
+アプリケーションは http://localhost:3000 で実行されます。
+
+## コンポーネント設計の特徴
+
+### Props 設計
+
+- 各コンポーネントは必要最小限の props のみを受け取ります
+- すべての props に適切な型定義が付与されています
+- コールバック関数の型も明確に定義されています
+
+### 状態管理
+
+- `useState`フックを使用して Todo リストの状態を管理
+- 状態の更新は常にイミュータブルに行われます
+- 型安全性が確保されています
+
+### UI デザイン
+
+- シンプルで直感的なインターフェース
+- レスポンシブデザイン
+- アクセシビリティに配慮した実装
+
+## 学習ポイント
+
+1. **コンポーネント分割**
+
+   - 単一責任の原則に基づいたコンポーネント設計
+   - 適切な粒度でのコンポーネント分割
+   - 再利用可能なコンポーネントの作成
+
+2. **TypeScript の活用**
+
+   - インターフェースを使用した props の型定義
+   - 関数の型定義
+   - ジェネリック型の使用（useState 等）
+
+3. **Props の受け渡し**
+
+   - 親子コンポーネント間のデータフロー
+   - コールバック関数の受け渡し
+   - 型安全な props 設計
+
+4. **イベント処理**
+   - ユーザー入力の処理
+   - イベントハンドラーの実装
+   - 非同期処理の考慮
+
+## 発展的な学習の提案
+
+1. **機能拡張**
+
+   - Todo の完了状態の追加
+   - 優先度の設定機能
+   - カテゴリー分類機能
+
+2. **状態管理の改善**
+
+   - Redux や zustand などの状態管理ライブラリの導入
+   - コンテキスト API の活用
+
+3. **UI の改善**
+   - CSS フレームワークの導入
+   - アニメーションの追加
+   - ダークモードの実装
+
+## ライセンス
+
+MIT
